@@ -9,8 +9,6 @@ class Post < ApplicationRecord
 
   after_save :post_counter_updates
 
-  private
-
   def post_counter_updates
     author.increment!(:posts_counter)
   end

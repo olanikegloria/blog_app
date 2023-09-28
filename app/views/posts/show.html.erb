@@ -1,1 +1,8 @@
-<p>show the post by id</p>
+<div class = "container bg-secondary">
+    <a href="/users/<%= @post.author.id %>/posts/<%= @post.id %>" class="text-decoration-none">
+      <div class="mb-3">
+        <%= render 'shared/post', post:@post %>
+        <%= render 'shared/comment', comments: @post.comments unless @post.comments.empty? %>
+      </div>
+    </a>
+</div>
