@@ -8,7 +8,7 @@ class PostsController < ApplicationController
   end
 
   def show
-    @post = Post.find(params[:id])
+    @post = Post.includes(:author, comments: :user).find(params[:id])
     @current_user = User.first
     @like = Like.new
   end
