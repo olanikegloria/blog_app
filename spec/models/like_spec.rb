@@ -6,13 +6,13 @@ RSpec.describe Like, type: :model do
     let(:post) { Post.new(title: 'Never Give up', text: 'I am an enthusiast software developer') }
 
     it 'Post id should always be an integer' do
-      like = Like.new(author: user.id, post: post.id)
+      like = Like.new(user: user.id, post: post.id)
       like.post = nil
       expect(like).to_not be_valid
     end
     it 'Post id should always be an integer' do
-      like = Like.new(author: user.id, post: post.id)
-      like.author = nil
+      like = Like.new(user: user.id, post: post.id)
+      like.user = nil
       expect(like).to_not be_valid
     end
   end
