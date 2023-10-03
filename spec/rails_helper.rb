@@ -33,6 +33,7 @@ RSpec.configure do |config|
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{Rails.root}/spec/fixtures"
 
+  config.include FactoryBot::Syntax::Methods
   # If you're not using ActiveRecord, or you'd prefer not to run each of your
   # examples within a transaction, remove the following line or assign false
   # instead of true.
@@ -62,4 +63,11 @@ RSpec.configure do |config|
   # config.filter_gems_from_backtrace("gem name")
 end
 
-Capybara.default_driver = :selenium_chrome
+# spec/rails_helper.rb or spec/spec_helper.rb
+Capybara.register_driver :selenium_chrome do |app|
+  options = Selenium::WebDriver::Chrome::Options.new
+  options.binary = '/path/to/chrome/binary' # Replace with the actual path
+  Capybara::Selenium::Driver.new(app, browser: :chrome, options:)
+end
+
+Capybara.javascript_driver = :selenium_chrome
