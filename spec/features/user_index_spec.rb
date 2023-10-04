@@ -1,4 +1,5 @@
 require 'rails_helper'
+
 RSpec.feature 'User Index Page' do
   before(:each) do
     @user1 = create(:user, name: 'user1', photo: 'user1_profile_image.jpg', posts_counter: 0)
