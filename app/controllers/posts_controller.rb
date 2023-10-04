@@ -4,7 +4,8 @@ class PostsController < ApplicationController
       .includes(:comments)
       .where(author: params[:user_id])
       .order(created_at: :asc)
-    @author = @posts.first.author
+    @author = @posts.first.author unless @posts.first.nil?
+    @user = User.find(params[:user_id])
   end
 
   def show
@@ -27,16 +28,11 @@ class PostsController < ApplicationController
   end
 
   def destroy
-    @post = Post.find(params[:id])
-    authorize! :destroy, @post
+    @post.likes.destroy_all
+    @post.comments.destroy_all
+    @post.destroy
 
-    if @post.destroy
-      flash[:success] = 'Post was successfully deleted.'
-    else
-      flash[:error] = 'Error deleting the post.'
-    end
-
-    redirect_to posts_path
+    redirect_to user_posts_path(@user)
   end
 
   private

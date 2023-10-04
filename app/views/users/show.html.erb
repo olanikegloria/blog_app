@@ -17,9 +17,6 @@
       </div>
     </a>
   <% end %>
-  <% if can?(:destroy, @comment) %>
-  <%= link_to 'Delete', comment_path(@comment), method: :delete, data: { confirm: 'Are you sure?' } %>
-  <% end %>
   <div class="w-90 mt-5 d-flex justify-content-center align-items-center ">
     <a href="/users/<%= @user.id %>/posts" class="btn bg-white m-1">See all posts</a>
   </div>
